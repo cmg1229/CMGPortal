@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'tech.apps.TechConfig',
 ]
 
+LOGIN_URL = '/login/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,22 +77,22 @@ WSGI_APPLICATION = 'CMGPortal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'FishOutOfWater',
-        'USER' : 'foowUser',
-        'PASSWORD' : 'W**Dchuck1234567',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+#DATABASES = {
+#    'default': {
+#        'ENGINE' : 'django.db.backends.mysql',
+#        'NAME' : 'FishOutOfWater',
+#        'USER' : 'foowUser',
+#        'PASSWORD' : 'W**Dchuck1234567',
+#        'HOST' : 'localhost',
+#        'PORT' : '3306',
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

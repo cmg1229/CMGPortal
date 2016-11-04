@@ -16,5 +16,6 @@ class BlogPost(models.Model):
     blog_title = models.CharField(max_length=30,null=True)
     blog_subtitle = models.CharField(max_length=30,null=True)
     blog_text = models.CharField(max_length=8000,default="blog text")
-    pub_date = models.DateTimeField(null=True)
+    pub_date = models.DateTimeField(default=timezone.now)
+    mod_date = models.DateTimeField(default=timezone.now)
     picture_location = models.CharField(max_length=30,null=True)

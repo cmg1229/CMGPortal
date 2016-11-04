@@ -1,51 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	  <meta charset="utf-8" />
-    <title>Bearded Fish Out of Water Blog</title>
-	   {% load static %}
-	    <link rel="stylesheet" href="{% static "/foow/css/bootstrap.min.css" %}" type="text/css" />
-	    <link rel="stylesheet" href="{% static "/foow/css/bootstrap-theme.min.css" %}" type="text/css" />
-	    <link rel="stylesheet" href="{% static "/foow/css/blog.css" %}" type="text/css" />
-  </head>
-  <body>
-    <div class="blog-masthead">
-    	<div class="container">
-    		<div class="blog-nav">
-    			<a class="blog-nav-item active">Bearded Fish Out of Water Blog</a>
-    			<a class="blog-nav-title">mandb.getmyip.com</a>
-    		</div>
-    	</div>
-    </div>
-    <div class="container">
-    	<div class="blog-header">
-    		<h1 class="blog-title">Bearded Fish Out of Water</h1>
-    		<p class="lead blog-description">Ramblings of a nervous country boy living abroad</p>
-    	</div>
-    	<div class="row">
-    		<div class="col-sm-8 blog-main" id="mainBlogDiv">
-                
-    		</div>
-    		<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-    			<div class="sidebar-module sidebar-module-inset">
-    				<h4>About</h4>
-    				<p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.  The purpose of this blog, among other things, is a means for this fuzzy fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process.  Please enjoy and feel free to share your experiences with me.<p>
-    			</div>
-    		</div>
-    	</div>
-    </div>
+{% extends 'foow/master.html' %}
 
+{% block title %}
+	Bearded Fish Out of Water Blog
+{% endblock %}
 
-    <template id="blogTemplate">
-    	<div class="blog-post">
-    		<h2 class="blog-post-title"></h2>
-    		<p class="blog-post-meta"></p>
-    		<p class="blog-post-text"></p>
-    	</div>
-    </template>
+{% block content %}
+	{% if posts %}
+		{% for post in posts %}
+			<div class="blog-post" name="{{ post.post_id }}">
+				<div class="blog-post-title">
+					{{ post.blog_title }}
+				</div>
+				<h3>{{ post.blog_subtitle }}</h3>
+				<p style="font-style: italic">{{ post.pub_date }}</p>
+				<div class="blog-description" style="font-size: small">
+				{% autoescape off %}
+				{{ post.blog_text }}
+				{% endautoescape %}
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		<h3>No Posts Available.</h3>
+	{% endif %}
+{% endblock %}
 
-    <script type="text/javascript" src="{% static "/foow/js/jquery-3.1.0.js" %}"></script>
-    <script type="text/javascript" src="{% static "/foow/js/bootstrap.min.js" %}"></script>
+{% block pagerunscripts %}
+	{% load static %}
     <script type="text/javascript" src="{% static "/foow/js/app.js" %}"></script>
-  </body>
-</html>
+{% endblock %}
