@@ -11,9 +11,20 @@ from foow.models import BlogPost
 # Create your views here.
 def index(request):
 	b = BlogPost.objects.order_by('-pub_date')[:1]
+
+	ascData = BlogPost.objects.order_by('post_id')
+	asclist = [pst.post_id for pst in ascData]
+
+
+	descData = BlogPost.objects.order_by('-post_id')
+	desclist = [pst.post_id for pst in descData]
+
+
 	template = loader.get_template('foow/index.html')
 	context = {
-		'posts' : b
+		'posts' : b,
+		'asclist' : asclist,
+		'desclist' : desclist
 	}
 	return HttpResponse(template.render(context, request))
 
@@ -35,6 +46,17 @@ def allposts(request):
 	b = BlogPost.objects.all()
 	data = serializers.serialize('json', b)
 	return HttpResponse(data, content_type="application/json")
+
+
+def allidsdescending(request):
+	data = BlogPost.objects.order_by('-pub_date')
+	mylist = [{'post_id':pst.post_id} for pst in data]
+	return HttpResponse(json.dumps(mylist), content_type="application/json")
+
+def allidsascending(request):
+	data = BlogPost.objects.order_by('pub_date')
+	mylist = [{'post_id':pst.post_id} for pst in data]
+	return HttpResponse(json.dumps(mylist), content_type="application/json")
 
 @login_required
 def add(request):
@@ -71,3 +93,4 @@ def Login(request):
 def Logout(request):
 	logout(request)
 	return HttpResponseRedirect(settings.LOGIN_URL)
+

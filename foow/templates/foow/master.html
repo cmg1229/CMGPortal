@@ -9,13 +9,26 @@
 	    <link rel="stylesheet" href="{% static "/foow/css/bootstrap.min.css" %}" type="text/css" />
 	    <link rel="stylesheet" href="{% static "/foow/css/bootstrap-theme.min.css" %}" type="text/css" />
 	    <link rel="stylesheet" href="{% static "/foow/css/blog.css" %}" type="text/css" />
+        {% block stylesheets %}
+        {% endblock %}
   </head>
   <body>
     <div class="blog-masthead">
     	<div class="container">
     		<div class="blog-nav">
     			<a class="blog-nav-item active" href="/">Bearded Fish Out of Water Blog</a>
-    			<a class="blog-nav-title">mandb.getmyip.com</a>
+                {% if user.is_anonymous %}
+    			<a class="blog-nav-title" href="/">mandb.getmyip.com</a>
+                {% else %}
+                <li class="blog-nav-title dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">mandb.getmyip.com<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/addcmg/">Add Post</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout/">Logout</a></li>
+                  </ul>
+                </li>
+                {% endif %}
     		</div>
     	</div>
     </div>
@@ -25,21 +38,23 @@
     		<p class="lead blog-description">Ramblings of a nervous country boy living abroad</p>
     	</div>
     	<div class="row">
+            {% block hiddenlists %} 
+            {% endblock %}
             <div class="col-sm-8 blog-main" id="mainBlogDiv">
             {% block content %}
             {% endblock %}
             </div>
     		<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
     			<div class="sidebar-module sidebar-module-inset">
-    				<h4>About</h4>
-    				<p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.  The purpose of this blog, among other things, is a means for this fuzzy fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process.  Please enjoy and feel free to share your experiences with me.<p>
+    				{% block sideblock %}
+                    {% endblock %}
     			</div>
     		</div>
     	</div>
     </div>
 
 
-    <script type="text/javascript" src="{% static "/foow/js/jquery-3.1.0.js" %}"></script>
+    <script type="text/javascript" src="{% static "/foow/js/jquery-3.1.1.min.js" %}"></script>
     <script type="text/javascript" src="{% static "/foow/js/bootstrap.min.js" %}"></script>
     {% block pagerunscripts %}
     {% endblock %}

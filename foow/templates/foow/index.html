@@ -1,31 +1,53 @@
 {% extends 'foow/master.html' %}
+{% load static %}
 
 {% block title %}
 	Bearded Fish Out of Water Blog
 {% endblock %}
 
-{% block content %}
-	{% if posts %}
-		{% for post in posts %}
-			<div class="blog-post" name="{{ post.post_id }}">
-				<div class="blog-post-title">
-					{{ post.blog_title }}
-				</div>
-				<h3>{{ post.blog_subtitle }}</h3>
-				<p style="font-style: italic">{{ post.pub_date }}</p>
-				<div class="blog-description" style="font-size: small">
-				{% autoescape off %}
-				{{ post.blog_text }}
-				{% endautoescape %}
-				</div>
-			</div>
-		{% endfor %}
-	{% else %}
-		<h3>No Posts Available.</h3>
+{% block stylesheets %}
+	    <link rel="stylesheet" href="{% static "/foow/css/index.css" %}" type="text/css" />
+{% endblock %}
+
+{% block hiddenlists %}
+	{% if asclist%}
+		<ul hidden id="asclist">
+			{% for id in asclist%}
+			<li name='{{forloop.counter}}'>{{id}}</li>
+			{% endfor %}
+		</ul>
 	{% endif %}
+	{% if asclist%}
+		<ul hidden id="desclist">
+			{% for id in desclist%}
+			<li name='{{ forloop.counter}}'>{{id}}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	<img style="display:none" class="spinner" src="{% static "/foow/images/ajax-loader.gif" %}" alt="Loading Another Post" />
+{% endblock %}
+
+{% block content %}
+	<!-- Split button -->
+	<div class="btn-group pull-right" id="sortButton">
+	  <button type="button" class="btn btn-default">Sort By</button>
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="caret"></span>
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="#" id="newestFirst">Newest First (Default)</a></li>
+	    <li><a href="#" id="oldestFirst">Oldest First</a></li>
+	  </ul>
+	</div>
+{% endblock %}
+
+{% block sideblock %}
+	<h4>About</h4>
+	<p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.  The purpose of this blog, among other things, is a means for this fuzzy fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process. <p>
 {% endblock %}
 
 {% block pagerunscripts %}
-	{% load static %}
+    <script type="text/javascript" src="{% static "/foow/js/moment.min.js" %}"></script>
     <script type="text/javascript" src="{% static "/foow/js/app.js" %}"></script>
 {% endblock %}
