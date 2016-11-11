@@ -12,4 +12,13 @@ class BlogPost(models.Model):
     blog_text = models.CharField(max_length=8000,default="blog text")
     pub_date = models.DateTimeField(default=timezone.now)
     mod_date = models.DateTimeField(default=timezone.now)
-    picture_location = models.CharField(max_length=30,null=True)
+    picture = models.FileField(null=True, blank=True)
+
+    def __unicode__(self):
+    	return self.blog_title + " " + self.blog_subtitle
+
+    def __str__(self):
+    	return self.blog_title + " " + self.blog_subtitle
+
+    class Meta:
+    	ordering = ["-pub_date"]
