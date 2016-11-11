@@ -8,8 +8,8 @@ from django.utils import timezone
 class BlogPost(models.Model):
     post_id = models.AutoField(primary_key=True)
     blog_title = models.CharField(max_length=40,null=True)
-    blog_subtitle = models.CharField(max_length=40,null=True)
-    blog_text = models.CharField(max_length=8000,default="blog text")
+    blog_subtitle = models.CharField(max_length=40,null=True,blank=True)
+    blog_text = models.CharField(max_length=10000,default="blog text")
     pub_date = models.DateTimeField(default=timezone.now)
     mod_date = models.DateTimeField(default=timezone.now)
     picture = models.FileField(null=True, blank=True)
