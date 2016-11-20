@@ -10,7 +10,7 @@ from foow.models import BlogPost
 
 # Create your views here.
 def index(request):
-	b = BlogPost.objects.order_by('-pub_date')[:1]
+	b = BlogPost.objects.order_by('-pub_date')
 
 	ascData = BlogPost.objects.order_by('post_id')
 	asclist = [pst.post_id for pst in ascData]

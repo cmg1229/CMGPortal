@@ -1,55 +1,48 @@
-{% extends 'foow/master.html' %}
+{% extends 'foow/newmaster.html' %}
 {% load static %}
 
-{% block title %}
-	Bearded Fish Out of Water Blog
-{% endblock %}
 
 {% block stylesheets %}
-	    <link rel="stylesheet" href="{% static "/foow/css/index.css" %}" type="text/css" />
 {% endblock %}
 
 {% block hiddenlists %}
 	{% if asclist%}
 		<ul hidden id="asclist">
 			{% for id in asclist%}
-			<li name='{{forloop.counter}}'>{{id}}</li>
+			<li name='{{ forloop.counter }}'>{{id}}</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 	{% if asclist%}
 		<ul hidden id="desclist">
 			{% for id in desclist%}
-			<li name='{{ forloop.counter}}'>{{id}}</li>
+			<li name='{{ forloop.counter }}'>{{id}}</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
-	<img style="display:none" class="spinner" src="{% static "/foow/images/ajax-loader.gif" %}" alt="Loading Another Post" />
+{% endblock %}
+
+{% block banner %}
+	
 {% endblock %}
 
 {% block content %}
-	<div style="height: 30px">
-	<!-- Split button -->
-	<div class="btn-group pull-right" id="sortButton">
-	  <button type="button" class="btn btn-default">Sort By</button>
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    <span class="caret"></span>
-	    <span class="sr-only">Toggle Dropdown</span>
-	  </button>
-	  <ul class="dropdown-menu">
-	    <li><a href="#" id="newestFirst">Newest First (Default)</a></li>
-	    <li><a href="#" id="oldestFirst">Oldest First</a></li>
-	  </ul>
-	</div>
-</div>
-{% endblock %}
-
-{% block sideblock %}
-	<h4>About</h4>
-	<p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.  The purpose of this blog, among other things, is a means for this fuzzy fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process. <p>
-{% endblock %}
-
-{% block pagerunscripts %}
-    <script type="text/javascript" src="{% static "/foow/js/moment.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "/foow/js/app.js" %}"></script>
+	{% if posts%}
+		{% for post in posts %}
+			<div class="post-preview">
+                <a href="/post/{{ post.post_id }}">
+                    <h2 class="post-title">
+                        {{ post.blog_title }}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{ post.blog_subtitle }}
+                    </h3>
+                </a>
+                <p class="post-meta">{{ post.pub_date.date }}</p>
+            </div>
+            {% if not forloop.last %}
+            <hr />
+            {% endif %}
+		{% endfor %}
+	{% endif %}
 {% endblock %}
