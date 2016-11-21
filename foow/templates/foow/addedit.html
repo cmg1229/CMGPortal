@@ -1,8 +1,14 @@
-{% extends 'foow/master.html' %}
+{% extends 'foow/newmaster.html' %}
+    {% load static %}
 
 {% block title %}
 Add/Edit Blog Post
 {% endblock %}
+
+{% block PageHeading %} Add New Post {% endblock %}
+{% block PageSubHeading %}{% endblock %}
+
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
 
 {% block content %}
     <form method="post" enctype="multipart/form-data">
@@ -28,7 +34,7 @@ Add/Edit Blog Post
     </form>
 {% endblock %}
 
-{% block pagerunscripts %}
+{% block postscripts %}
 	{% load static %}
     <script type="text/javascript" src="{% static "/foow/ckeditor/ckeditor.js" %}"></script>
     <script type="text/javascript" src="{% static "/foow/ckeditor/adapters/jquery.js" %}"></script>

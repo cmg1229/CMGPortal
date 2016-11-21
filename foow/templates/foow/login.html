@@ -1,11 +1,13 @@
-{% extends 'foow/master.html' %}
+{% extends 'foow/newmaster.html' %}
 	{% load static %}
 
-{% block title %}
-{% endblock %}
+{% block title %} Login {% endblock %}
+{% block PageHeading %} Login {% endblock %}
+{% block PageSubHeading %} To Add New Posts {% endblock %}
+
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
 
 {% block content %}
-<h2>Login to Edit</h2>
 <form method="post" action=".?next={{ redirect_to }}">
 	{% csrf_token %}
 	<div class="form-group">
@@ -22,6 +24,9 @@
 </form>
 {% endblock %}
 
-{% block pagerunscripts %}
-    <script type="text/javascript" src="{% static "/foow/js/detail.js" %}"></script>
+{% block postscripts %}
+	<script type="text/javascript">
+		$(".next").remove();
+		$(".previous").remove();
+	</script>
 {% endblock %}

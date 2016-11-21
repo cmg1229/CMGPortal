@@ -1,25 +1,35 @@
-{% extends 'foow/master.html' %}
+{% extends 'foow/newmaster.html' %}
 {% load static %}
 
 {% block title %}
 	{{ post.blog_title }} {{ post.blog_subtitle }}
 {% endblock %}
+{% block PageHeading %}
+	{{ post.blog_title }}
+{% endblock %}
+{% block PageSubHeading %}
+	{{ post.blog_subtitle }}
+{% endblock %}
+{% block hiddenlists %}
+	{% if next %}
+		<span hidden id="nextID">{{next.post_id}}</span>
+	{% endif %}
+	{% if previous %}
+		<span hidden id="previousID">{{previous.post_id}}</span>
+	{% endif %}
+{% endblock %}
+
+{% block banner %} {% if post.picture %}url('/static/{{ post.picture }}'){% else %}url('{% static "/foow/img/home-bg.jpg" %}'){% endif %}{% endblock %}
 
 {% block content %}
-	<div class="blog-post" name="{{ post.post_id }}">
-		<div class="blog-post-title">
-			{{ post.blog_title }}
-		</div>
-		<h3>{{ post.blog_subtitle }}</h3>
-		<p style="font-style: italic">{{ post.pub_date }}</p>
-		<div class="blog-description" style="font-size: small">
+	<p style="font-style:italic">Posted On: {{post.pub_date.date}}</p>
+	<div id="contentText" style=" text-align: justify; text-justify: inter-word;">
 		{% autoescape off %}
 		{{ post.blog_text }}
 		{% endautoescape %}
-		</div>
 	</div>
 {% endblock %}
 
-{% block pagerunscripts %}
-    <script type="text/javascript" src="{% static "/foow/js/detail.js" %}"></script>
+{% block postscripts %}
+    <script src="{% static "/foow/js/detail.js"%}"></script>	
 {% endblock %}

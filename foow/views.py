@@ -30,9 +30,20 @@ def index(request):
 
 def blogdetail(request, id):
 	b = BlogPost.objects.get(post_id=id)
+
+	next = None
+	prev = None
+	nextpost = BlogPost.objects.filter(post_id__gt=id).order_by('post_id')[:1]
+	if nextpost.exists():
+		next = nextpost[0]
+	prevpost = BlogPost.objects.filter(post_id__lt=id).order_by('-post_id')[:1]
+	if prevpost.exists():
+		prev = prevpost[0]
 	template = loader.get_template('foow/detail.html')
 	context = {
-		'post' : b
+		'post' : b,
+		'next' : next,
+		'previous' : prev
 	}
 	return HttpResponse(template.render(context, request))
 

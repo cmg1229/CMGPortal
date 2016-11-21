@@ -1,6 +1,15 @@
 {% extends 'foow/newmaster.html' %}
 {% load static %}
 
+{% block title %}
+Fish Out of Water Blog
+{% endblock %}
+{% block PageHeading %}
+Fish Out of Water Blog
+{% endblock %}
+{% block PageSubHeading %}
+Ramblings of a Nervous Southerner Abroad in Germany
+{% endblock %}
 
 {% block stylesheets %}
 {% endblock %}
@@ -22,27 +31,24 @@
 	{% endif %}
 {% endblock %}
 
-{% block banner %}
-	
-{% endblock %}
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
 
 {% block content %}
-	{% if posts%}
-		{% for post in posts %}
-			<div class="post-preview">
-                <a href="/post/{{ post.post_id }}">
-                    <h2 class="post-title">
-                        {{ post.blog_title }}
-                    </h2>
-                    <h3 class="post-subtitle">
-                        {{ post.blog_subtitle }}
-                    </h3>
-                </a>
-                <p class="post-meta">{{ post.pub_date.date }}</p>
-            </div>
-            {% if not forloop.last %}
-            <hr />
-            {% endif %}
-		{% endfor %}
-	{% endif %}
+	<div style="height:40px">
+		<div class="dropdown pull-right">
+		  <button class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		    Sort By:
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		    <li><a href="#" id="newestFirst">Newest First (Default)</a></li>
+		    <li><a href="#" id="oldestFirst">Oldest First</a></li>
+		  </ul>
+		</div>
+	</div>
+	
+{% endblock %}
+{% block postscripts %}
+    <script type="text/javascript" src="{% static "/foow/js/moment.min.js" %}"></script>
+    <script src="{% static "/foow/js/index.js"%}"></script>	
 {% endblock %}

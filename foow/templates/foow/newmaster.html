@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Bearded Eagle Technology">
+    <meta name="author" content="Bearded Eagle Solutions">
 
     <title>{% block title %} 
         {% endblock %}
@@ -21,6 +21,7 @@
         <link href="{% static "/foow/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
         <link href="{% static "/foow/css/clean-blog.min.css" %}" rel="stylesheet">
         <link href="{% static "/foow/vendor/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet" type="text/css">
+        <link href="{% static "/foow/css/index.css"%}" rel="stylesheet" type="text/css">
         {% block stylesheets %}
         {% endblock %}
 
@@ -48,24 +49,29 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">FOW Blog</a>
+                <a class="navbar-brand" href="/">FOW Blog</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="#" id="masterabout">About</a>
                     </li>
                     <li>
-                        <a href="about.html">About</a>
+                        <a href="#">Gallery</a>
                     </li>
                     <li>
-                        <a href="post.html">Gallery</a>
+                        <a href="#">Contact</a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="/addcmg/">Add Post</a>
                     </li>
                     <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="/logout/">Logout</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -75,14 +81,14 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('{% static "/foow/img/home-bg.jpg" %}')">
+    <header class="intro-header" style="background-image: {% block banner %}{% endblock %}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Fish Out of Water Blog</h1>
+                        <h1>{% block PageHeading %}{% endblock %}</h1>
                         <hr class="small">
-                        <span class="subheading">Ramblings of a Nervous Southerner Abroad in Germany</span>
+                        <span class="subheading">{% block PageSubHeading %}{% endblock %}</span>
                     </div>
                 </div>
             </div>
@@ -94,34 +100,43 @@
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="mainblogdiv">
-                <!--<div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
-                </div>
-                <hr>
-                `-->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" >
+                <div id="mainblogdiv">
                 {% block content %} 
                 {% endblock %}
+                </div>
                 
-                <!-- Pager 
+                <!-- Pager -->
                 <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
+                    <li class="previous">
+                        <a>&larr; Previous</a>
                     </li>
-                </ul>-->
+                    <li class="next">
+                        <a>Next &rarr;</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
     <hr>
+
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">About</h4>
+          </div>
+          <div class="modal-body">
+            <p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.</p><p>The purpose of this blog, among other things, is a means for this bearded fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process. <p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -129,7 +144,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center">
-                        <li>
+                        <!--<li>
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -152,9 +167,9 @@
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Bearded Eagle Tech 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Bearded Eagle Solutions 2016</p>
                 </div>
             </div>
         </div>
@@ -172,7 +187,9 @@
 
     <!-- Theme JavaScript -->
     <script src="{% static "/foow/js/clean-blog.min.js"%}"></script>
-
+    <!-- jQuery -->
+    <script src="{% static "/foow/js/app.js" %}"></script>
+    {% block postscripts %}{% endblock %}
 </body>
 
 </html>

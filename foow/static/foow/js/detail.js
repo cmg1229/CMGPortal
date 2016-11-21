@@ -1,4 +1,18 @@
 $(function(){
-	$('#masterSideBar').remove();
-	$('#mainBlogDiv').removeClass('col-sm-8').addClass('col-sm-12');
+	if($('#nextID').length){
+		var nextID = $('#nextID').html();
+		$('.next').find('a').attr('href','/post/'+nextID)
+	}
+	else
+	{
+		$('.next').hide();
+	}
+
+	if($('#previousID').length){
+		var prevID = $('#previousID').html();
+		$('.previous').find('a').attr('href','/post/'+prevID)
+	}
+	else{
+		$('.previous').hide();
+	}
 });

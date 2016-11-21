@@ -1,3 +1,6 @@
-.blog-post:hover {
+.next:hover {
+	cursor:pointer;
+}
+.previous:hover {
 	cursor:pointer;
 }
