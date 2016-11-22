@@ -19,7 +19,7 @@
 	{% endif %}
 {% endblock %}
 
-{% block banner %} {% if post.picture %}url('/static/{{ post.picture }}'){% else %}url('{% static "/foow/img/home-bg.jpg" %}'){% endif %}{% endblock %}
+{% block banner %} {% if post.picture %}url('/media/{{ post.picture }}'){% else %}url('{% static "/foow/img/home-bg.jpg" %}'){% endif %}{% endblock %}
 
 {% block content %}
 	<p style="font-style:italic">Posted On: {{post.pub_date.date}}</p>

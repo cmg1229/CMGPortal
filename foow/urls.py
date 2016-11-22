@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^addcmg/', views.add, name='New Post'),
     url(r'^login/', views.Login),
     url(r'^logout/', views.Logout),
+    url(r'^contact/', views.contact),
 
 ]

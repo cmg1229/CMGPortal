@@ -1,4 +1,6 @@
 import json
+import smtplib
+from email.mime.text import MIMEText
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
@@ -104,4 +106,18 @@ def Login(request):
 def Logout(request):
 	logout(request)
 	return HttpResponseRedirect(settings.LOGIN_URL)
+
+def contact(request):
+	if request.method =='GET':
+		return render(request, 'foow/contact.html')
+	if request.method == "POST":
+		text = request.POST['message']
+		email = request.POST['email']
+		msg = MIMEtext(text, plain)
+		msg['Subject'] = 'Message From FOW blog'
+		msg['To'] = settings.ADMIN_EMAIL
+		msg['From'] = email
+		s = smtplib.SMTP(settings.SMTP_ADDRESS)
+		s.sendmail(email, settings.ADMIN_EMAIL, msg)
+		return HttpResponseRedirect("/")
 
