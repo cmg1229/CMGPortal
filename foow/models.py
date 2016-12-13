@@ -25,3 +25,8 @@ class BlogPost(models.Model):
 
     class Meta:
     	ordering = ["-pub_date"]
+
+class HitCount(models.Model):
+    hit_id = models.AutoField(primary_key=True)
+    client_ip = models.CharField(max_length=72, null=False)
+    hit_date = models.DateTimeField(default=timezone.now)

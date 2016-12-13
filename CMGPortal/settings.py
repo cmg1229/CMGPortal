@@ -134,3 +134,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'CMGPortal/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'CMGPortal/media')
+ADMIN_EMAIL = 'cmg1229@gmail.com'
+SMTP_ADDRESS = 'localhost'

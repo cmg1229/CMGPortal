@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.template import loader
 from CMGPortal import settings
-from foow.models import BlogPost
+from foow.models import BlogPost, HitCount
 
 # Create your views here.
 def index(request):
@@ -21,6 +21,10 @@ def index(request):
 	descData = BlogPost.objects.order_by('-post_id')
 	desclist = [pst.post_id for pst in descData]
 
+	clientIP = get_client_ip(request)
+	hit = HitCount()
+	hit.client_ip = clientIP
+	hit.save()
 
 	template = loader.get_template('foow/index.html')
 	context = {
@@ -83,6 +87,7 @@ def add(request):
 		bp.blog_title = title
 		bp.blog_subtitle = subtitle
 		bp.blog_text = blogcontent
+		bp.picture = request.FILES['blogimage']
 		bp.save()
 		return HttpResponseRedirect("/")
 
@@ -113,11 +118,19 @@ def contact(request):
 	if request.method == "POST":
 		text = request.POST['message']
 		email = request.POST['email']
-		msg = MIMEtext(text, plain)
+		msg = MIMEText(text, 'plain')
 		msg['Subject'] = 'Message From FOW blog'
 		msg['To'] = settings.ADMIN_EMAIL
 		msg['From'] = email
 		s = smtplib.SMTP(settings.SMTP_ADDRESS)
 		s.sendmail(email, settings.ADMIN_EMAIL, msg)
 		return HttpResponseRedirect("/")
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 

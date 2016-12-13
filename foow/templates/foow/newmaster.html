@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Ramblings of a nervous southern American abroad in Germany.">
     <meta name="author" content="Bearded Eagle Solutions">
 
     <title>{% block title %} 
@@ -24,6 +24,20 @@
         <link href="{% static "/foow/css/index.css"%}" rel="stylesheet" type="text/css">
         {% block stylesheets %}
         {% endblock %}
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static "/foow/images/apple-icon-57x57.png" %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static "/foow/images/apple-icon-60x60.png" %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static "/foow/images/apple-icon-72x72.png" %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static "/foow/images/apple-icon-76x76.png" %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static "/foow/images/apple-icon-114x114.png" %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static "/foow/images/apple-icon-120x120.png" %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static "/foow/images/apple-icon-144x144.png" %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static "/foow/images/apple-icon-152x152.png" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "/foow/images/apple-icon-180x180.png" %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static "/foow/images/android-icon-192x192.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "/foow/images/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static "/foow/images/favicon-96x96.png" %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static "/foow/images/favicon-16x16.png" %}">
+    <link rel="manifest" href="{% static "/foow/images/manifest.json" %}">
 
 
     <!-- Custom Fonts -->
@@ -58,9 +72,10 @@
                     <li>
                         <a href="#" id="masterabout">About</a>
                     </li>
+                    <!--
                     <li>
                         <a href="#">Gallery</a>
-                    </li>
+                    </li>-->
                     <li>
                         <a href="/contact/">Contact</a>
                     </li>
@@ -86,7 +101,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>{% block PageHeading %}{% endblock %}</h1>
+                        <h1 id="headerText">{% block PageHeading %}{% endblock %}</h1>
                         <hr class="small">
                         <span class="subheading">{% block PageSubHeading %}{% endblock %}</span>
                     </div>
@@ -129,7 +144,7 @@
             <h4 class="modal-title" id="myModalLabel">About</h4>
           </div>
           <div class="modal-body">
-            <p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.</p><p>The purpose of this blog, among other things, is a means for this bearded fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process. <p>
+            <p>This site is the personal ramblings of an anxious homebody from Alabama who and up and decided to move to Germany with his wife.  As someone who has never been away from his home state for more than two weeks at any given time, this is a giant leap.</p><p>The purpose of this blog, among other things, is a means for this bearded fella to recount and share his experiences in the world beyond the Southern United States.  Hopefully, I can inspire other nervous people like myself to try something unique, while continually reassuring myself in the process.<p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -143,8 +158,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <!--<li>
+                    <!--<ul class="list-inline text-center">
+                        <li>
                             <a href="#">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
@@ -167,9 +182,9 @@
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
                                 </span>
                             </a>
-                        </li>-->
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Bearded Eagle Solutions 2016</p>
+                        </li>
+                    </ul>-->
+                    <p class="copyright text-muted">Copyright &copy; <a href="http://www.beardedeaglesolutions.com/">Bearded Eagle Solutions</a> 2016</p>
                 </div>
             </div>
         </div>

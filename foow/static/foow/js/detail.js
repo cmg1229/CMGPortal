@@ -1,4 +1,8 @@
 $(function(){
+	if($('#headerText').text() == 'Weihnachtsmärkte')
+	{
+		$('#headerText').text() = 'Weihnachts-märkte';
+	}
 	if($('#nextID').length){
 		var nextID = $('#nextID').html();
 		$('.next').find('a').attr('href','/post/'+nextID)
