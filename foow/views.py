@@ -87,7 +87,7 @@ def add(request):
 		bp.blog_title = title
 		bp.blog_subtitle = subtitle
 		bp.blog_text = blogcontent
-		bp.picture = request.FILES['blogimage']
+		bp.picture = request.FILES['blogimage'] if 'blogimage' in request.FILES else false
 		bp.save()
 		return HttpResponseRedirect("/")
 
