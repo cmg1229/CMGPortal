@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^login/', views.Login),
     url(r'^logout/', views.Logout),
     url(r'^contact/', views.contact),
+    url(r'^gallery/', views.gallery, name="Photo Gallery"),
+    url(r'^album/(?P<id>[0-9]+)/$', views.album),
 
 ]

@@ -30,3 +30,24 @@ class HitCount(models.Model):
     hit_id = models.AutoField(primary_key=True)
     client_ip = models.CharField(max_length=72, null=False)
     hit_date = models.DateTimeField(default=timezone.now)
+
+class Album(models.Model):
+    album_id = models.AutoField(primary_key=True)
+    album_name = models.CharField(max_length=72, null=False)
+    album_created = models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.album_name
+    def album_header(self):
+        return self.picture_set.filter(album_header = True)
+    class Meta:
+        ordering = ["-album_created"]
+
+class Picture(models.Model):
+    picture_id = models.AutoField(primary_key=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    picture_description = models.CharField(max_length=500, null=True) 
+    picture = models.FileField(storage=fs, null=False, blank=False)
+    thumbnail = models.FileField(storage=fs, null=False, blank=False) 
+    album_header = models.BooleanField(default=False, null=False)
+    def __str__(self):
+        return self.album.album_name

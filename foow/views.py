@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.template import loader
 from CMGPortal import settings
-from foow.models import BlogPost, HitCount
+from foow.models import BlogPost, HitCount, Album, Picture
 
 # Create your views here.
 def index(request):
@@ -74,6 +74,24 @@ def allidsascending(request):
 	data = BlogPost.objects.order_by('pub_date')
 	mylist = [{'post_id':pst.post_id} for pst in data]
 	return HttpResponse(json.dumps(mylist), content_type="application/json")
+
+def gallery(request):
+	albums = Album.objects.order_by('-album_created')
+	template = loader.get_template('foow/gallery.html')
+	context = {
+		'albums' : albums
+	}
+	return HttpResponse(template.render(context, request))
+
+def album(request, id):
+	album = Album.objects.get(album_id = id)
+	template = loader.get_template('foow/album.html')
+	pictures = album.picture_set.all()
+	context = {
+		'album' : album,
+		'pictures' : pictures
+	}
+	return HttpResponse(template.render(context, request))
 
 @login_required
 def add(request):

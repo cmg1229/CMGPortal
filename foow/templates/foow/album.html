@@ -1,0 +1,43 @@
+{% extends 'foow/newmaster.html' %}
+    {% load static %}
+
+{% block title %}
+	{{ album.album_name }}
+{% endblock %}
+
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static "/foow/css/nopager.css" %}" type="text/css" />
+{% endblock %}
+
+{% block PageHeading %} 
+	{{ album.album_name }} 
+{% endblock %}
+{% block PageSubHeading %}Photo Album{% endblock %}
+
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
+
+
+{% block content %}
+	{% if pictures%}
+	<div class="row">
+		{% for picture in pictures%}
+			{% if forloop.counter0|divisibleby:3 %}
+			</div>
+			<div class="row">
+			{% endif %}
+			<div class="col-md-4" style="text-align:center; font-size: small">
+				{% for picture in album.album_header %}
+					<a href="" />
+					<img src="/media/{{ picture.thumbnail }}" alt="{{ picture.thumbnail }} thumbnail" />
+					</a>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block postscripts%}
+{% endblock %}
