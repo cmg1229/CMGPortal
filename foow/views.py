@@ -92,6 +92,11 @@ def album(request, id):
 		'pictures' : pictures
 	}
 	return HttpResponse(template.render(context, request))
+	
+def picture(request, id):
+	picture = Picture.objects.get(picture_id = id)
+	data = serializers.serialize('json', [picture,])
+	return HttpResponse(data, content_type="application/json")
 
 @login_required
 def add(request):
@@ -109,6 +114,38 @@ def add(request):
 		bp.save()
 		return HttpResponseRedirect("/")
 
+@login_required
+def addalbum(request):
+	if request.method == 'GET':
+		return render(request, 'foow/addalbum.html')
+	if request.method == 'POST':
+		title = request.POST['title']
+		album = Album()
+		album.album_name = request.POST['title']
+		album.save()
+		return HttpResponseRedirect("/")
+
+@login_required
+def addpicture(request):
+	if request.method == 'GET':
+		template = loader.get_template('foow/addpicture.html')
+		albums = Album.objects.order_by('-album_created')
+		context = {
+			"albums" : albums
+		}
+		return HttpResponse(template.render(context, request))
+	if request.method == 'POST':
+		pic = Picture()
+		pic.album = Album.objects.get(album_id = int(request.POST['selectedalbumid']))
+		pic.picture_description = request.POST["imagedescription"]
+		pic.picture = request.FILES['imageprimary'] if 'imageprimary' in request.FILES else false
+		pic.thumbnail = request.FILES['imagethumb'] if 'imagethumb' in request.FILES else false
+		if request.POST.get('albumCover', False):
+			pic.album_header = True
+		else:
+			pic.album_header = False
+		pic.save()
+		return HttpResponseRedirect("/album/"+request.POST['selectedalbumid'])
 def Login(request):
 	next = request.GET.get('next', '/addcmg/')
 	if request.method == 'POST':
@@ -141,7 +178,7 @@ def contact(request):
 		msg['To'] = settings.ADMIN_EMAIL
 		msg['From'] = email
 		s = smtplib.SMTP(settings.SMTP_ADDRESS)
-		s.sendmail(email, settings.ADMIN_EMAIL, msg)
+		s.sendmail(email, [settings.ADMIN_EMAIL], msg.as_string())
 		return HttpResponseRedirect("/")
 
 def get_client_ip(request):

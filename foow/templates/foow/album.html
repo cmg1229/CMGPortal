@@ -27,17 +27,42 @@
 			</div>
 			<div class="row">
 			{% endif %}
-			<div class="col-md-4" style="text-align:center; font-size: small">
-				{% for picture in album.album_header %}
-					<a href="" />
-					<img src="/media/{{ picture.thumbnail }}" alt="{{ picture.thumbnail }} thumbnail" />
+			<div class="col-s-6 col-sm-4" style="text-align:center; font-size: small; padding: 10px">
+					<a />
+					<img src="/media/{{ picture.thumbnail }}" class="galleryImages" id="img{{picture.picture_id}}" alt="{{ picture.picture_id }} thumbnail" />
 					</a>
-				{% endfor %}
 			</div>
 		{% endfor %}
 	</div>
+	<ul id="picIDList" hidden>
+		{% for picture in pictures%}
+		<li id="pic{{picture.picture_id}}">{{picture.picture}}</li>
+		{% endfor %}
+	</ul>
 	{% endif %}
+	<!-- Modal -->
+	  <div class="modal fade" id="picModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">{{album.album_name}}</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<img id="modalImage" src="" alt="" class="img-responsive" />
+	          	<span id="modalText"></span>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+	  </div>
 {% endblock %}
 
 {% block postscripts%}
+	<script type="text/javascript" src="{% static "/foow/js/album.js" %}"></script>
 {% endblock %}

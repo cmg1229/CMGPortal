@@ -72,16 +72,29 @@
                     <li>
                         <a href="#" id="masterabout">About</a>
                     </li>
-                    <!--
+                    
                     <li>
-                        <a href="#">Gallery</a>
-                    </li>-->
+                        <a href="/gallery/">Gallery</a>
+                    </li>
                     <li>
                         <a href="/contact/">Contact</a>
                     </li>
                     {% if user.is_superuser %}
-                    <li>
-                        <a href="/addcmg/">Add Post</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Add <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown_cmgcustom">
+                            <li>
+                                <a href="/addcmg/">Post</a>
+                            </li>
+                            <li>
+                                <a href="/addalbum/">Album</a>
+                            </li>
+                            <li>
+                                <a href="/addpicture/">Picture</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="/logout/">Logout</a>

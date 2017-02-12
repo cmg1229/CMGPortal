@@ -10,10 +10,13 @@ urlpatterns = [
     url(r'^allidsdescending/', views.allidsdescending),
     url(r'^allidsascending/', views.allidsascending),
     url(r'^addcmg/', views.add, name='New Post'),
+    url(r'^addalbum/', views.addalbum, name='New Album'),
+    url(r'^addpicture/', views.addpicture, name='New Picture'),
     url(r'^login/', views.Login),
     url(r'^logout/', views.Logout),
     url(r'^contact/', views.contact),
     url(r'^gallery/', views.gallery, name="Photo Gallery"),
     url(r'^album/(?P<id>[0-9]+)/$', views.album),
+    url(r'^picture/(?P<id>[0-9]+)/$', views.picture),
 
 ]

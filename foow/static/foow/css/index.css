@@ -4,3 +4,10 @@
 .previous:hover {
 	cursor:pointer;
 }
+.dropdown_cmgcustom li {
+	 background-color: gray;
+}
+
+.dropdown_cmgcustom li:hover {
+	 background-color: gray;
+}

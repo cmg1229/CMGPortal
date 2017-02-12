@@ -1,0 +1,59 @@
+{% extends 'foow/newmaster.html' %}
+    {% load static %}
+
+{% block title %}
+Add Picture
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static "/foow/css/nopager.css" %}" type="text/css" />
+{% endblock %}
+
+{% block PageHeading %} Add New Post {% endblock %}
+{% block PageSubHeading %}{% endblock %}
+
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Album
+              </button>
+              <input class="span2" id="selectedalbumid" name="selectedalbumid" type="hidden">
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for album in albums %}
+                    <li class="dropdown-item" onclick="$('#selectedalbumid').val('{{album.album_id}}'); $('#dropdownMenuButton').text('{{album.album_name}}')">
+                        {{album.album_name}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>     
+        <div class="form-group">
+            <label for="imagedescription">Description</label>
+            <textarea class="editor" rows="70" cols="60" id="imagedescription" name="imagedescription"></textarea>
+        </div>
+        <div class="form-group" class="btn btn-default btn-file">
+            <label for="imageprimary">Image<input type="file" name="imageprimary" id="imageprimary" accept="image/*" class="file"  /></label>
+        </div>
+        <div class="form-group" class="btn btn-default btn-file">
+            <label for="imagethumb">Image Thumbnail<input type="file" name="imagethumb" id="imagethumb" accept="image/*" class="file"  /></label>
+        </div>
+        <div class="form-group">
+            <label for="albumCover">Album Cover</label>
+            <input type="checkbox" name="albumCover" id="albumCover"></input>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block postscripts %}
+	{% load static %}
+    <script type="text/javascript" src="{% static "/foow/ckeditor/ckeditor.js" %}"></script>
+    <script type="text/javascript" src="{% static "/foow/ckeditor/adapters/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "/foow/js/addpost.js" %}"></script>
+{% endblock %}

@@ -50,4 +50,4 @@ class Picture(models.Model):
     thumbnail = models.FileField(storage=fs, null=False, blank=False) 
     album_header = models.BooleanField(default=False, null=False)
     def __str__(self):
-        return self.album.album_name
+        return self.album.album_name + ' '+ str(self.picture_id)
