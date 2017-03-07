@@ -11,3 +11,7 @@
 .dropdown_cmgcustom li:hover {
 	 background-color: gray;
 }
+.galleryImages{
+	max-width: 200px;
+	max-height: 200px;
+}

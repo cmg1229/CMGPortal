@@ -30,10 +30,10 @@ Gallery
 			<div class="col-md-4" style="text-align:center; font-size: small">
 				{% for picture in album.album_header %}
 					<a href="/album/{{album.album_id}}" />
-					<img src="/media/{{ picture.thumbnail }}" alt="{{album.album_name}} thumbnail" />
+					<img src="/media/{{ picture.picture }}" class="galleryImages" style="max-height:200px; max-width:200px;" alt="{{album.album_name}} thumbnail" />
 					<br />
 					{{album.album_name}}</br>
-					{{album.album_created}}
+					Created <span class="albumUploadDate">{{album.album_created}}<span>
 					</a>
 				{% endfor %}
 			</div>

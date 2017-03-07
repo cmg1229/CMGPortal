@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^addcmg/', views.add, name='New Post'),
     url(r'^addalbum/', views.addalbum, name='New Album'),
     url(r'^addpicture/', views.addpicture, name='New Picture'),
+    url(r'^addpictures/(?P<id>[0-9]+)/$', views.addpictures, name='New Pictures'),
     url(r'^login/', views.Login),
     url(r'^logout/', views.Logout),
     url(r'^contact/', views.contact),

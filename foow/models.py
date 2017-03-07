@@ -47,7 +47,7 @@ class Picture(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     picture_description = models.CharField(max_length=500, null=True) 
     picture = models.FileField(storage=fs, null=False, blank=False)
-    thumbnail = models.FileField(storage=fs, null=False, blank=False) 
+    thumbnail = models.FileField(storage=fs, null=True, blank=True) 
     album_header = models.BooleanField(default=False, null=False)
     def __str__(self):
         return self.album.album_name + ' '+ str(self.picture_id)

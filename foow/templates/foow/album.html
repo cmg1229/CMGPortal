@@ -29,7 +29,7 @@
 			{% endif %}
 			<div class="col-s-6 col-sm-4" style="text-align:center; font-size: small; padding: 10px">
 					<a />
-					<img src="/media/{{ picture.thumbnail }}" class="galleryImages" id="img{{picture.picture_id}}" alt="{{ picture.picture_id }} thumbnail" />
+					<img src="/media/{{ picture.picture }}" class="galleryImages" style="max-height:200px; max-width:200px;" id="img{{picture.picture_id}}" alt="{{ picture.picture_id }} thumbnail" />
 					</a>
 			</div>
 		{% endfor %}
@@ -39,6 +39,9 @@
 		<li id="pic{{picture.picture_id}}">{{picture.picture}}</li>
 		{% endfor %}
 	</ul>
+	{% endif %}
+	{% if user.is_superuser %}
+		<a id="btnAddPictures" class="btn btn-default" href="/addpictures/{{album.album_id}}">Add Pictures</a>
 	{% endif %}
 	<!-- Modal -->
 	  <div class="modal fade" id="picModal" role="dialog">

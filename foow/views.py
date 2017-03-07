@@ -146,6 +146,24 @@ def addpicture(request):
 			pic.album_header = False
 		pic.save()
 		return HttpResponseRedirect("/album/"+request.POST['selectedalbumid'])
+
+
+@login_required
+def addpictures(request, id):
+	album = Album.objects.get(album_id = id)
+	template = loader.get_template('foow/addpictures.html')
+	context = {
+		"album" : album
+	}
+	if request.method == 'POST':
+		pic = Picture()
+		pic.album = album
+		pic.picture = request.FILES["file"]
+		pic.album_header = False
+		pic.save()
+	return HttpResponse(template.render(context, request))
+
+
 def Login(request):
 	next = request.GET.get('next', '/addcmg/')
 	if request.method == 'POST':

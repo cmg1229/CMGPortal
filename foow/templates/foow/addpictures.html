@@ -1,0 +1,26 @@
+{% extends 'foow/newmaster.html' %}
+    {% load static %}
+
+{% block title %}
+Add Picture
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static "/foow/css/nopager.css" %}" type="text/css" />
+{% endblock %}
+
+{% block PageHeading %} Add New Pictures {% endblock %}
+{% block PageSubHeading %}To {{album.album_name}} Album{% endblock %}
+
+{% block banner %}url('{% static "/foow/img/home-bg.jpg" %}'){% endblock %}
+
+{% block content %}
+    <form method="post" action="{{request.path}}" enctype="multipart/form-data" class="dropzone" id="dzFiles" enctype="multipart/form-data">
+        {% csrf_token %}
+    </form>
+{% endblock %}
+
+{% block postscripts %}
+	{% load static %}
+    <script type="text/javascript" src="{% static "/foow/js/dropzone.js" %}"></script>
+{% endblock %}
